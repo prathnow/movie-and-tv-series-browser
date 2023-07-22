@@ -1,0 +1,26 @@
+{
+  "name": "movie-and-tv-series-browser",
+  "version": "1.0.0",
+  "description": "Move and tv series browser with tmdb api",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prathnow/movie-and-tv-series-browser.git"
+  },
+  "author": "Patryk Rathnow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prathnow/movie-and-tv-series-browser/issues"
+  },
+  "homepage": "https://github.com/prathnow/movie-and-tv-series-browser#readme",
+  "dependencies": {
+    "parcel": "^2.9.3",
+    "sass": "^1.64.1"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.9.3"
+  }
+}
