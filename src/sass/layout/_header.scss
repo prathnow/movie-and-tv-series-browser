@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 8rem;
+  background-color: $bg-secondary-color;
+  width: 100%;
+
+  & a {
+    color: $primary-font-color;
+    transition: color 0.5s;
+    font-weight: 600;
+
+    &:hover {
+      color: $secondary-font-color;
+    }
+  }
+}
+
+.favorites {
+  text-transform: uppercase;
+  padding: 0 3rem;
+  font-size: 1.4rem;
+
+  & a {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  &--icon {
+    width: 30px;
+  }
+}
+
+.logo {
+  display: flex;
+}
