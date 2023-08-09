@@ -1,0 +1,66 @@
+.popular-movies {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem 0rem;
+  background-color: #fff;
+  color: #000;
+
+  &__header {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    padding: 3rem 8rem;
+    align-self: flex-start;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15.5rem;
+    margin: 2rem;
+    transition: 0.5s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &__img {
+    width: 15.5rem;
+    height: 22.5rem;
+  }
+
+  &__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+    margin: 1rem 0 0.5rem 0;
+
+    &--link:link,
+    &--link:visited {
+      text-decoration: none;
+      color: #000;
+      transition: 0.3s;
+    }
+
+    &--link:hover {
+      color: $bg-color;
+    }
+  }
+
+  &__date {
+    color: #333;
+    font-size: 1.2rem;
+  }
+}
