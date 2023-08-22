@@ -1,10 +1,12 @@
 import { state } from '../main';
+import { API_URL } from '../config';
+import { API_KEY } from '../config';
 
 export const getLatestMovies = async function () {
   // get all latest movies
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=8f83e040d081ec959ac8969f7f923394`
+      `${API_URL}/movie/now_playing?api_key=${API_KEY}`
     );
     const data = await response.json();
     state.movies = data;
