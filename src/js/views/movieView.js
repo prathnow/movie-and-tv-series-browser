@@ -1,3 +1,5 @@
+import { state } from "../main";
+
 class MovieView {
   renderMovieDetails(movieDetails) {
     // Rendering full information about the movie

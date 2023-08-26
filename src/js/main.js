@@ -1,7 +1,7 @@
 import { controlLatestMovies } from './controllers/movieController';
 
 export const state = {
-  movies: {},
+  movies: [],
   movieDetails: {},
 };
 

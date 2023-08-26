@@ -2,17 +2,40 @@ import { state } from '../main';
 import { API_URL } from '../config';
 import { API_KEY } from '../config';
 
-export const getLatestMovies = async function () {
-  // get all latest movies
+const getLatestMoviesID = async function () {
+  // get all latest moviesID
   try {
     const response = await fetch(
       `${API_URL}/movie/now_playing?api_key=${API_KEY}`
     );
     const data = await response.json();
-    state.movies = data;
-    return state.movies.results;
+    const moviesID = data.results.map(({ id }) => id);
+    return moviesID;
   } catch (error) {
-    throw new Error('Failed to fetch latest movies.');
+    throw new Error('Failed to fetch latest movies ID.');
+  }
+};
+
+export const fetchMovies = async function (movieID) {
+  // get Movies
+    try {
+      const response = await fetch(
+        `${API_URL}/movie/${movieID}?api_key=${API_KEY}`
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+        throw new Error('Failed to fetch latest movies.');
+    }
+};
+
+export const getAndSaveLatestMovies = async function () {
+  const moviesID = await getLatestMoviesID();
+  for (const id of moviesID) {
+    const movieInfo = await fetchMovies(id);
+    if (movieInfo) {
+      state.movies.push(movieInfo);
+    }
   }
 };
 

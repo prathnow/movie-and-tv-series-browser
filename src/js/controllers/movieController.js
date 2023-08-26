@@ -15,7 +15,7 @@ export const controlMovieDetails = async function (movieId) {
 
 export const controlLatestMovies = async function () {
   try {
-    await movieModel.getLatestMovies();
+    await movieModel.getAndSaveLatestMovies();
     movieView.renderLatestMovies(state.movies);
   } catch (err) {
     console.error(err);
