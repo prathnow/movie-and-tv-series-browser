@@ -21,3 +21,8 @@ export const controlLatestMovies = async function () {
     console.error(err);
   }
 };
+
+export const displayCarousel = async function () {
+    const moviesToCarousel = await movieModel.getCarousel();
+    movieView.renderCarousel(moviesToCarousel);
+}

@@ -18,15 +18,15 @@ const getLatestMoviesID = async function () {
 
 export const fetchMovies = async function (movieID) {
   // get Movies
-    try {
-      const response = await fetch(
-        `${API_URL}/movie/${movieID}?api_key=${API_KEY}`
-      );
-      const data = await response.json();
-      return data;
-    } catch (error) {
-        throw new Error('Failed to fetch latest movies.');
-    }
+  try {
+    const response = await fetch(
+      `${API_URL}/movie/${movieID}?api_key=${API_KEY}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error('Failed to fetch latest movies.');
+  }
 };
 
 export const getAndSaveLatestMovies = async function () {
@@ -45,4 +45,10 @@ export const getMovieDetails = async function (movieId) {
 
 export const getRecentTrailers = async function (trailers) {};
 
-export const getCarousel = async function (movies) {};
+export const getCarousel = async function () {
+  if (state.movies.length == 0) {
+    await getAndSaveLatestMovies();
+  }
+  const moviesToCarousel = state.movies.slice(0, 3);
+  return moviesToCarousel;
+};
