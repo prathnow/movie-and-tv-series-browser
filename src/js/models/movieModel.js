@@ -43,7 +43,16 @@ export const getMovieDetails = async function (movieId) {
   // get movie details
 };
 
-export const getRecentTrailers = async function (trailers) {};
+export const fetchTrailers = async function (movieID) {
+    try {
+        const response = await fetch(
+          `${API_URL}/movie/${movieID}/videos?language=en-US&api_key=${API_KEY}`
+        );
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        throw new Error('Failed to fetch recent trailers.');
+      }};
 
 export const getCarousel = async function () {
   if (state.movies.length == 0) {
