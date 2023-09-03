@@ -1,4 +1,12 @@
-import { API_URL, API_KEY } from './config';
+import { API_URL, API_KEY, TIMEOUT_SEC } from './config';
+
+const timeout = function (s) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error(`Request took too long! Timeout after ${s} seconds.`));
+    }, s * 1000);
+  });
+};
 
 export const fetchFromApi = async function (endpoint, id = '', resorce = '') {
   try {
@@ -8,14 +16,16 @@ export const fetchFromApi = async function (endpoint, id = '', resorce = '') {
         accept: 'application/json',
       },
     };
-    const response = await fetch(
+    const fetchPromise = await fetch(
       `${API_URL}${endpoint}${id ? '/' + id : ''}${
         resorce ? '/' + resorce : ''
       }?api_key=${API_KEY}`
     );
+    const response = await Promise.race([fetchPromise, timeout(TIMEOUT_SEC)]);
     const data = await response.json();
+
     return data;
-  } catch (error) {
-    throw new Error(`Failed to fetch data: ${error}`);
+  } catch (err) {
+    throw err;
   }
 };
