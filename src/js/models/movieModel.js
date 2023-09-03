@@ -1,15 +1,13 @@
 import { state } from '../main';
-import { API_URL } from '../config';
+import { API_ENDPOINTS, API_RESOURCE, API_URL } from '../config';
 import { API_KEY } from '../config';
+import { fetchFromApi } from '../helpers';
 
 const getLatestMoviesID = async function () {
   // get all latest moviesID
   try {
-    const response = await fetch(
-      `${API_URL}/movie/now_playing?api_key=${API_KEY}`
-    );
-    const data = await response.json();
-    const moviesID = data.results.map(({ id }) => id);
+    const response = await fetchFromApi(API_ENDPOINTS.latestMoviesID);
+    const moviesID = response.results.map(({ id }) => id);
     return moviesID;
   } catch (error) {
     throw new Error('Failed to fetch latest movies ID.');
@@ -19,9 +17,8 @@ const getLatestMoviesID = async function () {
 export const getPopularMoviesID = async function () {
   // get all popular moviesID
   try {
-    const response = await fetch(`${API_URL}/movie/popular?api_key=${API_KEY}`);
-    const data = await response.json();
-    const moviesID = data.results.map(({ id }) => id);
+    const response = await fetchFromApi(API_ENDPOINTS.popularMoviesID);
+    const moviesID = response.results.map(({ id }) => id);
     return moviesID;
   } catch (error) {
     throw new Error('Failed to fetch popular movies ID.');
@@ -31,11 +28,8 @@ export const getPopularMoviesID = async function () {
 export const fetchMovies = async function (movieID) {
   // get Movies
   try {
-    const response = await fetch(
-      `${API_URL}/movie/${movieID}?api_key=${API_KEY}`
-    );
-    const data = await response.json();
-    return data;
+    const response = await fetchFromApi(API_ENDPOINTS.fetchMovies, movieID);
+    return response;
   } catch (error) {
     throw new Error('Failed to fetch latest movies.');
   }
@@ -57,10 +51,7 @@ export const getMovieDetails = async function (movieId) {
 
 export const fetchTrailers = async function (movieID) {
   try {
-    const response = await fetch(
-      `${API_URL}/movie/${movieID}/videos?language=en-US&api_key=${API_KEY}`
-    );
-    const data = await response.json();
+    const response = await fetchFromApi(API_ENDPOINTS.fetchTrailers, movieID, API_RESOURCE.trailers)
     return data;
   } catch (error) {
     throw new Error('Failed to fetch recent trailers.');
