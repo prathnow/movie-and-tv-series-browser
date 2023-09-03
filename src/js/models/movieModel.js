@@ -25,6 +25,42 @@ export const getPopularMoviesID = async function () {
   }
 };
 
+const createMovieObject = function (movieData, objType) {
+  const movie = movieData;
+  if (objType === 'body') {
+    return {
+      id: movie.id,
+      title: movie.title,
+      background: movie.backdrop_path,
+      date: movie.release_date,
+      categories: movie.genres,
+    };
+  }
+  if (objType === 'details') {
+    return {
+      id: movie.id,
+      imdb_id: movie.imdb_id,
+      title: movie.title,
+      title_original: movie.original_title,
+      date: movie.release_date,
+      overview: movie.overview,
+      tagline: movie.tagline,
+      categories: movie.genres,
+      background: movie.backdrop_path,
+      poster: movie.poster_path,
+      vote_avg: movie.vote_average,
+      vote_count: movie.vote_count,
+      org_lang: movie.original_language,
+      spoke_lang: movie.spoken_language,
+      homepage: movie.homepage,
+      prod_countries: movie.production_countries,
+      prod_companies: movie.production_companies,
+      ...(movie.revenue && { revenue: movie.revenue }),
+      ...(movie.video && { video: movie.video }),
+    };
+  }
+};
+
 export const fetchMovies = async function (movieID) {
   // get Movies
   try {
@@ -51,7 +87,11 @@ export const getMovieDetails = async function (movieId) {
 
 export const fetchTrailers = async function (movieID) {
   try {
-    const response = await fetchFromApi(API_ENDPOINTS.fetchTrailers, movieID, API_RESOURCE.trailers)
+    const response = await fetchFromApi(
+      API_ENDPOINTS.fetchTrailers,
+      movieID,
+      API_RESOURCE.trailers
+    );
     return data;
   } catch (error) {
     throw new Error('Failed to fetch recent trailers.');
