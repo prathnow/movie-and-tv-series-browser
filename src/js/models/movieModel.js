@@ -76,7 +76,7 @@ export const getAndSaveLatestMovies = async function () {
   for (const id of moviesID) {
     const movieInfo = await fetchMovies(id);
     if (movieInfo) {
-      state.movies.push(movieInfo);
+      state.movies.push(createMovieObject(movieInfo, 'body'));
     }
   }
 };
