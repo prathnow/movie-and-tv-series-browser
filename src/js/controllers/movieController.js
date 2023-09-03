@@ -1,5 +1,5 @@
 import movieView from '../views/movieView';
-import * as movieModel from '../models/movieModel'
+import * as movieModel from '../models/movieModel';
 import { state } from '../main';
 
 export const controlMovieDetails = async function (movieId) {
@@ -23,6 +23,6 @@ export const controlLatestMovies = async function () {
 };
 
 export const displayCarousel = async function () {
-    const moviesToCarousel = await movieModel.getCarousel();
-    movieView.renderCarousel(moviesToCarousel);
-}
+  const moviesToCarousel = await movieModel.getCarousel();
+  movieView.renderCarousel(moviesToCarousel);
+};

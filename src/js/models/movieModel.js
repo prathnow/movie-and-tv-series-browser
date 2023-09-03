@@ -83,6 +83,8 @@ export const getAndSaveLatestMovies = async function () {
 
 export const getMovieDetails = async function (movieId) {
   // get movie details
+  const movie = await fetchMovies(movieId);
+  if (movie) state.movieDetails.push(createMovieObject(movie, 'details'));
 };
 
 export const fetchTrailers = async function (movieID) {
