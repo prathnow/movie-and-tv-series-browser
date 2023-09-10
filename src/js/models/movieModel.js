@@ -3,25 +3,15 @@ import { API_ENDPOINTS, API_RESOURCE, API_URL } from '../config';
 import { API_KEY } from '../config';
 import { fetchFromApi } from '../helpers';
 
-const getLatestMoviesID = async function () {
-  // get all latest moviesID
+const getMoviesID = async function (type) {
+  // get all latest or popular moviesID
+  const endpointKey = `${type}MoviesID`;
   try {
-    const response = await fetchFromApi(API_ENDPOINTS.latestMoviesID);
+    const response = await fetchFromApi(API_ENDPOINTS[endpointKey]);
     const moviesID = response.results.map(({ id }) => id);
     return moviesID;
   } catch (error) {
-    throw new Error('Failed to fetch latest movies ID.');
-  }
-};
-
-export const getPopularMoviesID = async function () {
-  // get all popular moviesID
-  try {
-    const response = await fetchFromApi(API_ENDPOINTS.popularMoviesID);
-    const moviesID = response.results.map(({ id }) => id);
-    return moviesID;
-  } catch (error) {
-    throw new Error('Failed to fetch popular movies ID.');
+    throw new Error(`Failed to fetch ${type} movies ID.`);
   }
 };
 
@@ -72,7 +62,7 @@ export const fetchMovies = async function (movieID) {
 };
 
 export const getAndSaveLatestMovies = async function () {
-  const moviesID = await getLatestMoviesID();
+  const moviesID = await getMoviesID('latest');
   for (const id of moviesID) {
     const movieInfo = await fetchMovies(id);
     if (movieInfo) {
