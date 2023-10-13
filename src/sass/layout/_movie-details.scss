@@ -1,0 +1,105 @@
+.movie {
+  background-color: #fff;
+
+  &__header {
+    background-position: left calc((50vw - 170px) - 340px) top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    color: #fff;
+
+    &--bg {
+      background-image: linear-gradient(
+        to bottom right,
+        rgba(31.5, 31.5, 31.5, 1),
+        rgba(31.5, 31.5, 31.5, 0.84)
+      );
+    }
+
+    &--h1 {
+      font-size: 2.8rem;
+      color: #fff;
+      margin: 0;
+      padding: 2rem 0 0 0;
+    }
+
+    &--newline a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    &--tagline {
+      font-size: 1.8rem;
+      color: #ddd;
+      padding: 2rem 0 0 0;
+      font-style: italic;
+    }
+  }
+
+  &__details {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 4rem;
+
+    &--poster {
+      img {
+        min-width: 30rem;
+        width: 30rem;
+        height: 45rem;
+        border-radius: 3%;
+      }
+    }
+
+    &--overview {
+      flex: 1;
+      padding: 0 4rem;
+      text-align: left;
+
+      h2 {
+        font-size: 2.4rem;
+        margin: 0;
+        padding: 2rem 0 0 0;
+      }
+
+      p {
+        font-size: 1.6rem;
+      }
+      button {
+        padding: 3rem 3rem 1rem 3rem;
+    }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 5rem;
+    & p {
+      font-size: 16px;
+      margin: .5rem 0;
+      width: 50%;
+    }
+    &--release-date,
+    &--categories,
+    &--homepage,
+    &--production-countries,
+    &--production-companies,
+    &--revenue,
+    &--runtime,
+    &--popularity,
+    &--budget {
+      font-weight: bold;
+    }
+    &--categories a,
+    &--homepage {
+      color: #007bff;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

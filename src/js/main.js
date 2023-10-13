@@ -1,13 +1,12 @@
-import { API_ENDPOINTS, API_RESOURCE } from './config';
-import { fetchFromApi } from './helpers';
-import { controlLatestMovies } from './controllers/movieController';
+import { MainController } from './controllers/mainController';
 
 export const state = {
-  movies: [],
+  latest: [],
+  latestTrailers: [],
+  popular: [],
   movieDetails: [],
+  movieGenresList: [],
 };
 
-const init = () => {
-    controlLatestMovies();
-};
-init();
+const mainController = new MainController();
+mainController.init();

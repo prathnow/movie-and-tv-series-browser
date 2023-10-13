@@ -3,12 +3,17 @@
   justify-content: center;
   align-items: center;
   color: #fff;
-  padding: 0 1rem;
   background-size: cover;
   background-position: left;
   box-shadow: rgba($bg-color, 1) 0px -33px 59px 20px inset;
+  transition: background-image 0.5s ease-in-out;
+  overflow: hidden;
+  z-index: 1;
+  position: relative;
 
   &__content {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
     width: 100%;
   }
 
@@ -19,13 +24,25 @@
     border: none;
     width: 5rem;
     height: 5rem;
-    position: relative;
     overflow: hidden;
     cursor: pointer;
+    z-index: 2;
+    position: absolute;
+
+    &--left {
+      left: 0;
+      transform: translateX(50%);
+      top: 50%;
+    }
+
+    &--right {
+      right: 0;
+      transform: translateX(-50%);
+      top: 50%;
+    }
 
     &--left::before {
       content: '\2039';
-      position: absolute;
       left: 50%;
       transform: translateX(-50%);
       top: 0;
@@ -33,7 +50,6 @@
 
     &--right::before {
       content: '\203A';
-      position: absolute;
       right: 50%;
       transform: translateX(50%);
       top: 0;
@@ -43,9 +59,11 @@
 
 .slide {
   display: flex;
+  flex: 0 0 100%;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 5rem;
+  padding: 5rem 10rem;
+  background-color: rgba(#000, 0.4);
 
   &__category {
     display: flex;
@@ -61,16 +79,6 @@
       margin-right: 0.5rem;
       font-weight: 700;
       color: #fff;
-
-      &--blue {
-        background-color: #1692bb;
-      }
-      &--yellow {
-        background-color: #f5b50a;
-      }
-      &--orange {
-        background-color: #ec5a1a;
-      }
     }
   }
 
@@ -85,6 +93,7 @@
     &--year {
       font-size: 3rem;
       color: #ccc;
+      margin: 0 1rem;
     }
   }
 

@@ -1,28 +1,21 @@
-import movieView from '../views/movieView';
-import * as movieModel from '../models/movieModel';
+import { MovieModel } from '../models/movieModel';
+import { MovieView } from '../views/movieView';
 import { state } from '../main';
 
-export const controlMovieDetails = async function (movieId) {
-  try {
-    if (movieId) return;
-
-    await movieModel.getMovieDetails(movieId);
-    movieView.renderMovieDetails(state.movieDetails);
-  } catch (err) {
-    console.error(err);
+export class MovieController {
+  constructor() {
+    this.view = new MovieView();
+    this.model = new MovieModel();
   }
-};
 
-export const controlLatestMovies = async function () {
-  try {
-    await movieModel.getAndSaveLatestMovies();
-    movieView.renderLatestMovies(state.movies);
-  } catch (err) {
-    console.error(err);
+  async showMovieDetailsPage(movieId) {
+    if (!movieId) throw new Error('Invalid movieId');
+
+    try {
+      await this.model.getMovieDetails(movieId);
+      this.view.renderMovieDetailsPage(state.movieDetails);
+    } catch (error) {
+      console.log(error);
+    }
   }
-};
-
-export const displayCarousel = async function () {
-  const moviesToCarousel = await movieModel.getCarousel();
-  movieView.renderCarousel(moviesToCarousel);
-};
+}

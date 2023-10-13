@@ -7,8 +7,10 @@ export const API_ENDPOINTS = {
   popularMoviesID: '/movie/popular',
   fetchMovies: '/movie',
   fetchTrailers: '/movie',
+  fetchGenresMovie: '/genre/movie/list',
 };
 
 export const API_RESOURCE = {
   trailers: 'videos',
+  latestTrailers: 'movie/latest/videos',
 };
