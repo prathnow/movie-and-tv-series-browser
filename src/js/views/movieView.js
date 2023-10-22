@@ -1,3 +1,4 @@
+import { state } from '../main';
 import { DOMList } from './domList';
 
 export class MovieView {
@@ -18,6 +19,77 @@ export class MovieView {
       .map((company) => company.name)
       .join(', ');
     const revenue = movie.revenue ? `$${movie.revenue.toLocaleString()}` : '$0';
+
+    const allActors = state.movieDetailsCredits.cast;
+    console.log(allActors.length);
+    const actorsPerPage = 7; // Liczba aktorów do wyświetlenia na stronie
+    let currentPage = 1;
+
+    const displayActors = (page = 1) => {
+      const startIndex = (page - 1) * actorsPerPage;
+      const endIndex = startIndex + actorsPerPage;
+      const actorsToDisplay =
+        page === 0 ? allActors : allActors.slice(startIndex, endIndex);
+      currentPage = page;
+
+      const actorsHTML = actorsToDisplay
+        .map((actor) => {
+          return `<div class="movie__actorCard">
+          <a class="movie__actor--img-link" href="/person/${actor.id}">${
+            actor.profile_path
+              ? `<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${actor.profile_path}">`
+              : ``
+          }</a>
+          <p><a class="movie__actor--link" href="/person/${actor.id}">${
+            actor.name
+          }</a></p>
+          <p class="movie__actor--character">${actor.character
+            .split('/')
+            .join('<br>')}</p>
+          </div>
+          `;
+        })
+        .join('');
+
+      return actorsHTML;
+    };
+
+    const displayCrew = () => {
+      const allCrew = state.movieDetailsCredits.crew;
+
+      const crewHTML = allCrew
+        .map((crew) => {
+          return `<div class="movie__crewCard">
+          <a class="movie__crew--img-link" href="/person/${crew.id}">${
+            crew.profile_path
+              ? `<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${crew.profile_path}">`
+              : ``
+          }</a>
+          <p><a class="movie__crew--link" href="/person/${crew.id}">${
+            crew.name
+          }</a></p>
+          <p class="movie__crew--character">${crew.job
+            .split('/')
+            .join('<br>')}</p>
+          </div>
+          `;
+        })
+        .join('');
+
+      return crewHTML;
+    };
+
+    const addDisplayActors = (page) => {
+      const div = document.querySelector('.movie__actors');
+      const markup = displayActors(page);
+      console.log(markup);
+      div.insertAdjacentHTML('beforeend', markup);
+
+      allActors.length <= page * actorsPerPage
+        ? (document.querySelector('.movie__showMoreButton').style.display =
+            'none')
+        : '';
+    };
 
     const markup = `
       <div class="movie">
@@ -51,7 +123,15 @@ export class MovieView {
           </div>
         </div>
 
+        <section class="movie__credits">
+        <div class="movie__credits--cast"><h3>Top Billed Cast <span><a href="../cast-and-crew">(Show all)</a></span></h3></div>
+        <div class="movie__actors">${displayActors()}
+        </div>
+        <button class="movie__showMoreButton btn">Show more...</button>
+        </section>
+
         <section class="movie__footer">
+        <div class="movie__footer--info"<h4>Other information</h4></div>
           <p>Release Date: <span class="movie__footer--release-date">${
             movie.date
           }</span></p>
@@ -75,5 +155,8 @@ export class MovieView {
 
     DOMList.app.innerHTML = '';
     DOMList.app.insertAdjacentHTML('afterbegin', markup);
+    document
+      .querySelector('.movie__showMoreButton')
+      .addEventListener('click', () => addDisplayActors(currentPage + 1));
   }
 }

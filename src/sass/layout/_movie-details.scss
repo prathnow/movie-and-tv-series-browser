@@ -67,7 +67,92 @@
       }
       button {
         padding: 3rem 3rem 1rem 3rem;
+      }
     }
+  }
+
+  &__credits {
+    width: 80%;
+    margin: 0 auto;
+
+    &--cast {
+      font-weight: 600;
+      font-size: 2em;
+      margin: 2rem 0 2rem 0;
+      border-bottom: 1px solid rgba(#999, 0.7);
+      & a:link {
+        text-decoration: none;
+        color: #666;
+        font-size: 1.6rem;
+        padding-left: 1rem;
+      }
+    }
+  }
+
+  &__actor {
+    &--link {
+      &:link {
+        font-weight: 700;
+        font-size: 1.25rem;
+        text-decoration: none;
+        color: #000;
+      }
+      &:hover {
+        color: #999;
+      }
+      &:visited,
+      :active {
+        color: #333;
+      }
+    }
+    &--character {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__actors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__actorCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px 4px 10px 10px;
+    border: 1px solid rgba(#999, 0.5);
+    padding-bottom: 10px;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: rgba(#ddd, 0.2);
+    width: 13.8rem;
+    transition: all 0.5s;
+    transform: translateX(0);
+
+    &:active {
+      transform: translateX(-100%);
+    }
+    &:hover {
+      transform: translateY(-2%);
+      cursor: pointer;
+    }
+  }
+
+  &__showMoreButton {
+    margin: 2rem 50%;
+    transform: translateX(-50%);
+    padding: 1rem 3rem;
+    width: 20rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(#000000, 0.2);
+    font-size: 1.6rem;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #ddd;
+      transition: all 0.2s;
     }
   }
 
@@ -75,10 +160,19 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 5rem;
+    margin: 0 auto;
+    width: 80%;
+    &--info {
+      border-bottom: 1px solid #999999b3;
+      margin: 2rem 0;
+      font-size: 2em;
+      font-weight: 600;
+      width: 100%;
+      display: inline-block;
+    }
     & p {
       font-size: 16px;
-      margin: .5rem 0;
+      margin: 0.5rem 0;
       width: 50%;
     }
     &--release-date,

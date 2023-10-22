@@ -133,4 +133,18 @@ export class MovieModel {
       throw new Error('Failed to fetch genres list');
     }
   }
+
+  async fetchMovieCredits(movieId) {
+    try {
+      const credits = await fetchFromApi(
+        API_ENDPOINTS.fetchMovies,
+        movieId,
+        API_RESOURCE.fetchMovieCredits
+      );
+      return state.movieDetailsCredits = credits;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
 }

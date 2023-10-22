@@ -13,4 +13,5 @@ export const API_ENDPOINTS = {
 export const API_RESOURCE = {
   trailers: 'videos',
   latestTrailers: 'movie/latest/videos',
+  fetchMovieCredits: 'credits'
 };

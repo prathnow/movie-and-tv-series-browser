@@ -13,6 +13,7 @@ export class MovieController {
 
     try {
       await this.model.getMovieDetails(movieId);
+      await this.model.fetchMovieCredits(movieId)
       this.view.renderMovieDetailsPage(state.movieDetails);
     } catch (error) {
       console.log(error);

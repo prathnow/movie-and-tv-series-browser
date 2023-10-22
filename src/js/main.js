@@ -5,6 +5,7 @@ export const state = {
   latestTrailers: [],
   popular: [],
   movieDetails: [],
+  movieDetailsCredits: [],
   movieGenresList: [],
 };
 
