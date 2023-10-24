@@ -57,26 +57,36 @@ export class MovieView {
     const displayCrew = () => {
       const allCrew = state.movieDetailsCredits.crew;
 
-      const crewHTML = allCrew
-        .map((crew) => {
-          return `<div class="movie__crewCard">
+      const crewHTML =
+        `<div class="movie__credits--cast"><h3>Actors</h3></div>
+        <div class="movie__actors">
+        ${displayActors(0)} 
+        </div>
+        <div class="movie__credits--cast"><h3>Others</h3></div>
+        <div class="movie__actors">` +
+        allCrew
+          .map((crew) => {
+            return `<div class="movie__crewCard">
           <a class="movie__crew--img-link" href="/person/${crew.id}">${
-            crew.profile_path
-              ? `<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${crew.profile_path}">`
-              : ``
-          }</a>
-          <p><a class="movie__crew--link" href="/person/${crew.id}">${
-            crew.name
-          }</a></p>
+              crew.profile_path
+                ? `<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${crew.profile_path}">`
+                : ``
+            }</a>
+          <p class="movie__crew--person"><a class="movie__crew--link" href="/person/${
+            crew.id
+          }">${crew.name}</a></p>
           <p class="movie__crew--character">${crew.job
             .split('/')
             .join('<br>')}</p>
           </div>
           `;
-        })
-        .join('');
+          })
+          .join('') +
+        `</div>`;
 
-      return crewHTML;
+      const app = document.querySelector('.movie__credits');
+      app.innerHTML = '';
+      app.insertAdjacentHTML('afterbegin', crewHTML);
     };
 
     const addDisplayActors = (page) => {
@@ -123,8 +133,8 @@ export class MovieView {
           </div>
         </div>
 
-        <section class="movie__credits">
-        <div class="movie__credits--cast"><h3>Top Billed Cast <span><a href="../cast-and-crew">(Show all)</a></span></h3></div>
+        <section class="movie__credits" id="credits">
+        <div class="movie__credits--cast"><h3>Top Billed Cast <span><a class="cast-crew" href="#credits">(Show all)</a></span></h3></div>
         <div class="movie__actors">${displayActors()}
         </div>
         <button class="movie__showMoreButton btn">Show more...</button>
@@ -158,5 +168,8 @@ export class MovieView {
     document
       .querySelector('.movie__showMoreButton')
       .addEventListener('click', () => addDisplayActors(currentPage + 1));
+    document
+      .querySelector('.cast-crew')
+      .addEventListener('click', () => displayCrew());
   }
 }

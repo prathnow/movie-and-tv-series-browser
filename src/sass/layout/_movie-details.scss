@@ -38,6 +38,7 @@
 
   &__details {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     flex-direction: row;
     padding: 4rem;
@@ -108,17 +109,21 @@
     &--character {
       font-size: 1.2rem;
     }
+    &--img-link {
+      flex: 1;
+    }
   }
 
   &__actors {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    text-align: center;
   }
 
   &__actorCard {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     margin: 10px 4px 10px 10px;
@@ -127,7 +132,6 @@
     border-radius: 1rem;
     overflow: hidden;
     background-color: rgba(#ddd, 0.2);
-    width: 13.8rem;
     transition: all 0.5s;
     transform: translateX(0);
 
@@ -137,6 +141,52 @@
     &:hover {
       transform: translateY(-2%);
       cursor: pointer;
+    }
+    a,
+    & p {
+      width: 13.8rem;
+    }
+  }
+
+  &__crewCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 49%;
+    height: 5rem;
+    margin: 4px 4px 4px 4px;
+    border: 1px solid #ddd;
+    background-color: rgba(#eee, 0.2);
+    text-align: center;
+    flex: 1;
+    transition: all 0.5s;
+    transform: translateX(0);
+
+    &:active {
+      transform: translateX(-100%);
+    }
+    &:hover {
+      transform: translateY(-5%);
+      cursor: pointer;
+    }
+
+    & p {
+      width: 10rem;
+      color: #666;
+    }
+    & a {
+      width: 10rem;
+      text-decoration: none;
+      color: #000;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    & img {
+      height: 4rem;
+      width: auto;
+      display: block;
     }
   }
 
