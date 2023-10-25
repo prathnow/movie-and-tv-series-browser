@@ -1,0 +1,51 @@
+.footer {
+  display: flex;
+  color: #fff;
+  padding: 4rem 8rem 3rem 8rem;
+  justify-content: center; /* Wyśrodkowanie elementów w poziomie */
+  border-top: 1px solid $bg-secondary-color;
+  background: linear-gradient(to bottom, $bg-color, $bg-secondary-color);
+}
+
+.footer__about,
+.footer__support,
+.footer__contact {
+  flex: 1;
+  text-align: left; /* Wyśrodkowanie tekstu wewnątrz poszczególnych kolumn */
+}
+
+.footer__about--p,
+.footer__support--p {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.footer__list--item {
+  margin-bottom: 0.8rem;
+}
+
+.footer__list--item a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+  font-size: 1.2rem;
+}
+
+.footer__list--item a:hover {
+  color: #dcf836;
+}
+
+.footer__info {
+  font-size: 1.4rem;
+}
+
+.footer_address {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+}
