@@ -1,5 +1,5 @@
+import { state } from '../main';
 import { DOMList } from './domList';
-
 
 export class MainView {
   getRandomColor() {
@@ -88,14 +88,18 @@ export class MainView {
       <div class="latest-trailers__player-container">`;
     for (const vid of trailers) {
       if (vid.site === 'YouTube') {
+        const img = state.latest.find((find) => find.id === vid.mov_id);
+        // markup += `
+        //     <iframe
+        //     src="https://www.youtube.com/embed/${vid.key}"
+        //     frameborder="0"
+        //     class="latest-trailers__player"
+        //     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        //     allowfullscreen
+        //     ></iframe>`;
         markup += `
-            <iframe
-            src="https://www.youtube.com/embed/${vid.key}"
-            frameborder="0"
-            class="latest-trailers__player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            ></iframe>`;
+        <a href="http://youtube.com/watch?v=${vid.key}"><img src="https://image.tmdb.org/t/p/w220_and_h330_face${img.poster}" class="latest-trailers__player" /></a>
+        `;
       }
     }
     markup += `
@@ -163,7 +167,9 @@ export class MainView {
             </ul>
           </div>
 
-          <button class="btn btn__slide" onclick="window.location.href='/movie/${mov.id}';" value="${mov.title}">More datail</button>
+          <button class="btn btn__slide" onclick="window.location.href='/movie/${
+            mov.id
+          }';" value="${mov.title}">More datail</button>
         </div>`;
     }
     markup += `

@@ -110,12 +110,13 @@ export class MovieModel {
 
     for (const id of trailerId) {
       const trailer = await this.fetchTrailers(id);
+      trailer.results[0].mov_id = id;
       state.latestTrailers.push(trailer.results[0]);
     }
   }
 
   async getDataToLatestTrailerComponent() {
-    return state.latestTrailers.slice(0, 4);
+    return state.latestTrailers.slice(0, 6);
   }
 
   async getDataToCarousel() {
@@ -141,10 +142,9 @@ export class MovieModel {
         movieId,
         API_RESOURCE.fetchMovieCredits
       );
-      return state.movieDetailsCredits = credits;
+      return (state.movieDetailsCredits = credits);
     } catch (error) {
       throw new Error(error);
     }
   }
-
 }
